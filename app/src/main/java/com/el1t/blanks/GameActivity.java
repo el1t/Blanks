@@ -1,4 +1,4 @@
-package com.el1t.bah;
+package com.el1t.blanks;
 
 import android.app.Activity;
 import android.content.Context;

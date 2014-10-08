@@ -1,4 +1,4 @@
-package com.el1t.bah;
+package com.el1t.blanks;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

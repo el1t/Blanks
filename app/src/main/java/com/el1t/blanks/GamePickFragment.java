@@ -1,4 +1,4 @@
-package com.el1t.bah;
+package com.el1t.blanks;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -69,4 +69,5 @@ public class GamePickFragment extends Fragment {
 	public void clear() {
 		answer.setText("");
 	}
+
 }

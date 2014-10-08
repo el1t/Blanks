@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">BAH</string>
-    <string name="placeholder_title">Lorem ipsum dolor sit amet, consectetur adipisicing elit...</string>
-	<string name="placeholder_source">From default pack</string>
+    <string name="app_name">Blanks</string>
+    <string name="placeholder_title"></string>
+	<string name="placeholder_source">First Version</string>
     <string name="action_settings">Settings</string>
 
 </resources>
