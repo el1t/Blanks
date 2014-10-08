@@ -32,10 +32,10 @@ public class GamePickFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_game_picker, container, false);
 
-		cardTitle   = (TextView)rootView.findViewById(R.id.card_title);
-		pack        = (TextView)rootView.findViewById(R.id.pack);
-		answer      = (EditText)rootView.findViewById(R.id.answer);
-		submit      = (Button)  rootView.findViewById(R.id.submit);
+		cardTitle	= (TextView)rootView.findViewById(R.id.card_title);
+		pack		= (TextView)rootView.findViewById(R.id.pack);
+		answer		= (EditText)rootView.findViewById(R.id.answer);
+		submit		= (Button)	rootView.findViewById(R.id.submit);
 
 		submit.setOnClickListener(new View.OnClickListener() {
 			@Override

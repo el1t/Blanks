@@ -6,9 +6,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context=".Regular$PlaceholderFragment"
-    android:orientation="vertical"
-	android:background="@color/second_gray">
+    tools:context=".GamePickFragment"
+    android:orientation="vertical" >
 
     <RelativeLayout
         android:layout_width="fill_parent"
