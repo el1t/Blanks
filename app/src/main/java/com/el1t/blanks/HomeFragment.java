@@ -16,7 +16,8 @@ import android.widget.TextView;
 /**
  * Created by El1t on 10/8/14.
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment
+{
 	private Home mListener;
 	private Button start;
 	private ImageView logo;
@@ -42,17 +43,9 @@ public class HomeFragment extends Fragment {
 			}
 		});
 
-		// Fading animations
-		// Set animation for logo
+		// Set animation for start button
 		Animation fadeInAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.fade);
 		fadeInAnimation.setFillAfter(true);
-		fadeInAnimation.setStartOffset(500);
-		logo.startAnimation(fadeInAnimation);
-
-		// Set animation for start button
-		fadeInAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.fade);
-		fadeInAnimation.setFillAfter(true);
-		fadeInAnimation.setStartOffset(1000);
 		start.startAnimation(fadeInAnimation);
 
 		return rootView;

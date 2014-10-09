@@ -9,18 +9,19 @@ import android.view.MenuItem;
 /**
  * Created by El1t on 10/8/14.
  */
-public class HomeActivity extends Activity implements HomeFragment.Home {
-	private HomeFragment mHomeFragment;
+public class HomeActivity extends Activity implements HomeFragment.Home
+{
+	private LogoAnimationFragment mLogoAnimationFragment;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
-		mHomeFragment = new HomeFragment();
+		mLogoAnimationFragment = new LogoAnimationFragment();
 
 		if (savedInstanceState == null) {
 			getFragmentManager().beginTransaction()
-					.add(R.id.container, mHomeFragment)
+					.add(R.id.container, mLogoAnimationFragment)
 					.commit();
 		}
 	}
