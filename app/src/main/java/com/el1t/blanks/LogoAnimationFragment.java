@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class LogoAnimationFragment extends Fragment
 {
 	private final int DELAY = 500;
-	private final int OFFSET = 200;
+	private final int OFFSET = 100;
 	private ArrayList<ImageView> logo;
 	private ImageView a;
 	private TranslateAnimation mTranslateAnimation;
@@ -44,14 +44,14 @@ public class LogoAnimationFragment extends Fragment
 		for(int i = 0; i < logo.size(); i++) {
 			fadeInAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.fade);
 			fadeInAnimation.setFillAfter(true);
-			fadeInAnimation.setStartOffset(i * OFFSET + DELAY);
+			fadeInAnimation.setStartOffset(i * OFFSET);
 			logo.get(i).startAnimation(fadeInAnimation);
 		}
 		// Animate Description (a)
 		// Fade
 		fadeInAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.fade);
 		fadeInAnimation.setFillAfter(true);
-		fadeInAnimation.setStartOffset(DELAY + OFFSET * 6 + 2 * OFFSET);
+		fadeInAnimation.setStartOffset(OFFSET * 6 + 2 * OFFSET);
 		fadeInAnimation.setAnimationListener(new Animation.AnimationListener() {
 
 			@Override
@@ -75,6 +75,7 @@ public class LogoAnimationFragment extends Fragment
 		mTranslateAnimation = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0f,
 				Animation.RELATIVE_TO_SELF, 0f, Animation.RELATIVE_TO_SELF, 0f, Animation.RELATIVE_TO_PARENT, -0.35f);
 		mTranslateAnimation.setFillAfter(true);
+		mTranslateAnimation.setStartOffset(DELAY);
 		mTranslateAnimation.setDuration(750);
 		mTranslateAnimation.setInterpolator(new EaseOutInterpolator());
 		mTranslateAnimation.setAnimationListener(new Animation.AnimationListener() {
