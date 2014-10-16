@@ -1,6 +1,8 @@
 package com.el1t.blanks;
 
 import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -19,22 +21,29 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 
-public class GameActivity extends Activity implements GamePickFragment.OnFragmentInteractionListener{
+public class GameActivity extends Activity implements GameBlankFragment.OnFragmentInteractionListener
+{
 	private static final String TAG = "GAME";
 	private URL SERVER;
+	private GameBlankFragment mBlankFragment;
 	private GamePickFragment mPickFragment;
 	private InputMethodManager mInputMethodManager;
 	private String answer;
+	private String title;
+	private String pack;
+	private int view;
+	private FragmentManager mFragmentManager;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game);
-		mPickFragment = new GamePickFragment();
+		mFragmentManager = getFragmentManager();
+		mBlankFragment = new GameBlankFragment();
 
 		if (savedInstanceState == null) {
-			getFragmentManager().beginTransaction()
-					.add(R.id.container, mPickFragment)
+			mFragmentManager.beginTransaction()
+					.add(R.id.layout, mBlankFragment)
 					.commit();
 		}
 
@@ -46,6 +55,7 @@ public class GameActivity extends Activity implements GamePickFragment.OnFragmen
 
 		mInputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
 
+		view = 0;
 		requestCard();
     }
 
@@ -79,13 +89,40 @@ public class GameActivity extends Activity implements GamePickFragment.OnFragmen
 	public void submit(String answer) {
 		this.answer = answer;
 		mInputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-		mPickFragment.clear();
+		mBlankFragment.clear();
 		requestCard();
+	}
+
+	// Switches to next view
+	protected void nextView() {
+		switch (view) {
+			case 0:
+				mPickFragment = new GamePickFragment();
+				Bundle content = new Bundle();
+				content.putString("title", title);
+				content.putString("pack", pack);
+				mPickFragment.setArguments(content);
+				mFragmentManager.beginTransaction()
+						.replace(R.id.layout, mPickFragment)
+						.commit();
+				view++;
+				break;
+
+			case 1:
+				mBlankFragment = new GameBlankFragment();
+				mFragmentManager.beginTransaction()
+						.replace(R.id.layout, mBlankFragment)
+						.commit();
+				view = 0;
+				break;
+		}
 	}
 
 	// Updates the card text with a new question
 	protected void updateCard(String response) {
-		mPickFragment.update(response.replace("\"", ""), "First Version");
+		title = response;
+		pack = "First Version";
+		mBlankFragment.update(response, "First Version");
 	}
 
 	// Queries server for a random card
@@ -111,23 +148,16 @@ public class GameActivity extends Activity implements GamePickFragment.OnFragmen
 			} catch (Exception e) {
 				Log.e(TAG, "Connection error.", e);
 			}
-			return response;
+			return response.replace("\"", "");
 		}
 
 		@Override
 		protected void onPostExecute(String result) {
 			super.onPostExecute(result);
-			//Do anything with response..
 			updateCard(result);
 		}
 
 		private String readStream(InputStream is) {
-		/*
-		 * To convert the InputStream to String we use the BufferedReader.readLine()
-		 * method. We iterate until the BufferedReader return null which means
-		 * there's no more data to read. Each line will appended to a StringBuilder
-		 * and returned as String.
-		 */
 			BufferedReader reader = new BufferedReader(new InputStreamReader(is));
 			StringBuilder sb = new StringBuilder();
 

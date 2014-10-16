@@ -2,6 +2,8 @@ package com.el1t.blanks;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,9 +13,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 /**
- * Created by El1t on 10/16/14.
+ * Created by El1t on 10/7/14.
  */
-public class GamePickFragment extends Fragment
+public class GameBlankFragment extends Fragment
 {
 	private OnFragmentInteractionListener mListener;
 	private TextView cardTitle;
@@ -26,7 +28,7 @@ public class GamePickFragment extends Fragment
 		public void finish();
 	}
 
-	public GamePickFragment() {
+	public GameBlankFragment() {
 	}
 
 	@Override
@@ -36,6 +38,7 @@ public class GamePickFragment extends Fragment
 
 		cardTitle	= (TextView)rootView.findViewById(R.id.card_title);
 		pack		= (TextView)rootView.findViewById(R.id.pack);
+		answer		= (EditText)rootView.findViewById(R.id.answer);
 		submit		= (Button)	rootView.findViewById(R.id.submit);
 
 		submit.setOnClickListener(new View.OnClickListener() {
@@ -44,12 +47,6 @@ public class GamePickFragment extends Fragment
 				mListener.submit(answer.getText().toString());
 			}
 		});
-
-		Bundle args = getArguments();
-		if (args != null) {
-			cardTitle.setText(args.getString("title"));
-			pack.setText(args.getString("pack"));
-		}
 
 		return rootView;
 	}
@@ -66,6 +63,15 @@ public class GamePickFragment extends Fragment
 			throw new ClassCastException(activity.toString()
 					+ " must implement OnFragmentInteractionListener");
 		}
+	}
+
+	public void update(String title, String pack) {
+		cardTitle.setText(title);
+		this.pack.setText(pack);
+	}
+
+	public void clear() {
+		answer.setText("");
 	}
 
 }
